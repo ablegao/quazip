@@ -75,7 +75,7 @@ set(QUAZIP_PACKAGE_NAME QuaZip-Qt${QUAZIP_QT_MAJOR_VERSION})
 find_package(Qt6 REQUIRED COMPONENTS Core Core5Compat
                      OPTIONAL_COMPONENTS Network Test)
 # Name of the Zlib component has been changed in 6.3.1
-if(Qt6_VERSION VERSION_GREATER_EQUAL "6.3.1")
+if(Qt6_VERSION VERSION_GREATER_EQUAL "6.5.1")
     set(QUAZIP_QT_ZLIB_COMPONENT BundledZLIB)
 else()
     set(QUAZIP_QT_ZLIB_COMPONENT Zlib)
