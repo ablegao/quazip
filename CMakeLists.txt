@@ -71,35 +71,19 @@ set(QUAZIP_LIB_TARGET_NAME QuaZip)
 set(QUAZIP_DIR_NAME QuaZip-Qt${QUAZIP_QT_MAJOR_VERSION}-${QUAZIP_LIB_VERSION})
 set(QUAZIP_PACKAGE_NAME QuaZip-Qt${QUAZIP_QT_MAJOR_VERSION})
 
-if(QUAZIP_QT_MAJOR_VERSION EQUAL 6)
-	find_package(Qt6 REQUIRED COMPONENTS Core Core5Compat
-                         OPTIONAL_COMPONENTS Network Test)
-  # Name of the Zlib component has been changed in 6.3.1
-  if(Qt6_VERSION VERSION_GREATER_EQUAL "6.3.1")
+
+find_package(Qt6 REQUIRED COMPONENTS Core Core5Compat
+                     OPTIONAL_COMPONENTS Network Test)
+# Name of the Zlib component has been changed in 6.3.1
+if(Qt6_VERSION VERSION_GREATER_EQUAL "6.3.1")
     set(QUAZIP_QT_ZLIB_COMPONENT BundledZLIB)
-  else()
-    set(QUAZIP_QT_ZLIB_COMPONENT Zlib)
-  endif()
-	set(QUAZIP_LIB_LIBRARIES Qt6::Core Qt6::Core5Compat)
-	set(QUAZIP_TEST_QT_LIBRARIES Qt6::Core Qt6::Core5Compat Qt6::Network Qt6::Test)
-	set(QUAZIP_PKGCONFIG_REQUIRES "zlib, Qt6Core")
-elseif(QUAZIP_QT_MAJOR_VERSION EQUAL 5)
-	find_package(Qt5 REQUIRED COMPONENTS Core
-                         OPTIONAL_COMPONENTS Network Test)
-  set(QUAZIP_QT_ZLIB_COMPONENT Zlib)
-	set(QUAZIP_LIB_LIBRARIES Qt5::Core)
-	set(QUAZIP_TEST_QT_LIBRARIES Qt5::Core Qt5::Network Qt5::Test)
-	set(QUAZIP_PKGCONFIG_REQUIRES "zlib, Qt5Core")
-elseif(QUAZIP_QT_MAJOR_VERSION EQUAL 4)
-	find_package(Qt4 4.5.0 REQUIRED COMPONENTS QtCore
-                           OPTIONAL_COMPONENTS QtNetwork QtTest)
-  set(QUAZIP_QT_ZLIB_COMPONENT Zlib)
-	set(QUAZIP_LIB_LIBRARIES Qt4::QtCore)
-	set(QUAZIP_TEST_QT_LIBRARIES Qt4::QtCore Qt4::QtNetwork Qt4::QtTest)
-	set(QUAZIP_PKGCONFIG_REQUIRES "zlib, QtCore")
 else()
-	message(FATAL_ERROR "Qt version ${QUAZIP_QT_MAJOR_VERSION} is not supported")
+    set(QUAZIP_QT_ZLIB_COMPONENT Zlib)
 endif()
+set(QUAZIP_LIB_LIBRARIES Qt6::Core Qt6::Core5Compat)
+set(QUAZIP_TEST_QT_LIBRARIES Qt6::Core Qt6::Core5Compat Qt6::Network Qt6::Test)
+set(QUAZIP_PKGCONFIG_REQUIRES "zlib, Qt6Core")
+
 
 message(STATUS "Using Qt version ${QUAZIP_QT_MAJOR_VERSION}")
 
